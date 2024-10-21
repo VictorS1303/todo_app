@@ -1,7 +1,7 @@
 const todoAppContainer = document.querySelector('.todo-app-container')
+const ul = document.querySelector('ul')
 const addTodoBtn = document.querySelector('#add_todo_btn')
 const createTodoBtn = document.querySelector('#create_todo_btn')
-console.log(createTodoBtn)
 const addTodoInformationContainer = document.querySelector('.add-todo-information-container')
 console.log(addTodoInformationContainer)
 
@@ -60,3 +60,153 @@ function closeCreateTodoModal()
 {
     addTodoInformationContainer.close()
 }
+
+
+// TODO ITEM //
+function addItemToDOM()
+{
+    // Create UL
+    const ul = createUL()
+
+    // Create LI
+    const li = createLI('item todo-list-item d-flex jc-space_between ai-center')
+
+    // Create Todo Text
+    const todoText = createTodoText('todo-item-text')
+
+    // Create Amount Container
+    const amountContainer = createAmountContainer('amount-container d-flex jc-center ai-center')
+
+    // Create amount paragraph
+    const amountParagraph = createAmountParagraph('amount')
+
+    // Create List Item Controls Container
+    const listItemControlsContainer = createListItemControlsContainer('container list-item-controls-container d-flex')
+
+    // Create Complete Todo Button
+    const completeTodoBtn = createCompleteTodoBtn('btn complete-todo-btn')
+
+    // Create Complete Todo Button Icon
+    const completeTodoBtnIcon = createCompleteTodoBtnIcon('fas fa-check')
+
+    // Create Delete Todo Button
+    const deleteTodoBtn = createDeleteTodoBtn('btn delete-todo-btn')
+
+    // Create Delete Todo Button Icon
+    const deleteTodoBtnIcon = createDeleteTodoBtnIcon('fas fa-trash-alt')
+
+    // Append amountParagraph to amountContainer
+    amountContainer.appendChild(amountParagraph)
+
+    // Append completeTOdoBtn and deleteTodoBtn to listItemControlsContainer
+    listItemControlsContainer.append(completeTodoBtn, deleteTodoBtn)
+
+    // Append icon to completeTodoBtn
+    completeTodoBtn.appendChild(completeTodoBtnIcon)
+
+    // Append icon to deleteTodoBtn
+    deleteTodoBtn.appendChild(deleteTodoBtnIcon)
+
+    // Call appendItems with all its parameters
+    appendItems(ul, li, todoText, amountContainer, listItemControlsContainer, completeTodoBtn, deleteTodoBtn)
+}
+
+// Append Items
+function appendItems(ul, li, todoText, amountContainer, listItemControlsContainer)
+{
+    // Append UL to todoAppContainer
+    todoAppContainer.appendChild(ul)
+
+    // Append li to ul
+    ul.appendChild(li)
+
+    // Append to li
+    li.append(todoText, amountContainer, listItemControlsContainer)
+}
+
+
+// Creator Functions //
+
+// Create UL
+function createUL()
+{
+    const ul = document.createElement('ul')
+    return ul
+}
+
+// Create LI
+function createLI(liClasses)
+{
+    const li = document.createElement('li')
+    li.className = liClasses
+    return li
+}
+
+// Create Todo Text
+function createTodoText(todoTextClasses)
+{
+    const todoText = document.createElement('span')
+    todoText.className = todoTextClasses
+    todoText.textContent = 'Hey'
+    return todoText
+}
+
+// Create Amount Container
+function createAmountContainer(amountContainerClasses)
+{
+    const amountContainer = document.createElement('span')
+    amountContainer.className = amountContainerClasses
+    return amountContainer
+}
+
+// Create Amount Paragraph
+function createAmountParagraph(amountParagraphClasses)
+{
+    const amountParagraph = document.createElement('p')
+    amountParagraph.textContent = 'Hey'
+    amountParagraph.className = amountParagraphClasses
+    return amountParagraph
+}
+
+// Create List Item Controls Container
+function createListItemControlsContainer(listItemControlsContainerClasses)
+{
+    const listItemControlsContainer = document.createElement('div')
+    listItemControlsContainer.className = listItemControlsContainerClasses
+    return listItemControlsContainer
+}
+
+// Create Complete Todo Button
+function createCompleteTodoBtn(completeTodoBtnClasses)
+{
+    const completeTodoBtn = document.createElement('button')
+    completeTodoBtn.className = completeTodoBtnClasses
+    return completeTodoBtn
+}
+
+// Create Complete Todo Button Icon
+function createCompleteTodoBtnIcon(completeTodoBtnIconClasses)
+{
+    const completeTodoBtnIcon = document.createElement('i')
+    completeTodoBtnIcon.className = completeTodoBtnIconClasses
+    return completeTodoBtnIcon
+}
+
+// Create Delete Todo Button
+function createDeleteTodoBtn(deleteTodoBtnClasses)
+{
+    const deleteTodoBtn = document.createElement('button')
+    deleteTodoBtn.className = deleteTodoBtnClasses
+    return deleteTodoBtn
+}
+
+// Create Delete Todo Button Icon
+function createDeleteTodoBtnIcon(deleteTodoBtnIconClasses)
+{
+    const deleteTodoBtnIcon = document.createElement('i')
+    deleteTodoBtnIcon.className = deleteTodoBtnIconClasses
+    return deleteTodoBtnIcon
+}
+
+
+addItemToDOM()
