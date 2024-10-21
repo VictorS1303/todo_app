@@ -28,10 +28,15 @@
     --todo-item-background-color: #fff;
     --todo-item-text-color: #008080;
     --todo-item-completed-text-color: #ccc;
-    --todo-item-complete-btn-color: #fff;
-    --todo-item-complete-btn-background-color: #008080;
-    --todo-item-delete-color: #fff;
-    --todo-item-delete-btn-background-color: #f00;
+
+    --todo-item-complete-btn-color: #008080;
+    --todo-item-complete-btn-hover-color: #fff;
+    --todo-item-complete-btn-hover-background-color: #008080;
+
+    --todo-item-delete-btn-color: #f00;
+    --todo-item-delete-btn-background-color: #fff;
+    --todo-item-delete-btn-hover-background-color: #f00;
+    --todo-item-delete-btn-hover-color: #fff;
     --add-todo-btn-color: #fff;
     --add-todo-btn-background-color: #2399c1;
 
@@ -40,7 +45,7 @@
 
     /* Shadows */
     --text-shadow: 0 2px 5px rgba(0, 0, 0, .3);
-    --box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 }
 
 body

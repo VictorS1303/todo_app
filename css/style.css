@@ -25,3 +25,80 @@ button.btn.add-todo-btn
         transition: none;
     }
 }
+
+.container.todo-app-container
+{
+    width: 80vw;
+    max-width: 350px;
+    height: 400px;
+    overflow-x: scroll;
+    margin-top: 30px;
+
+    & ul
+    {
+        height: 100%;
+
+        & .amount-container
+        {
+            gap: 10px;
+        }
+    }
+    
+    & ul li
+    {
+        height: 45px;
+        width: 100%;
+        background-color: var(--todo-item-background-color);
+        box-shadow: var(--box-shadow);
+        padding-left: 15px;
+
+        &:not(:last-child)
+        {
+            border-bottom: 2px solid #ccc;
+        }
+
+        & .container.list-item-controls-container
+        {
+            height: 100%;
+            border-left: 1.5px solid #ccc;
+
+            & button
+            {
+                height: 100%;
+                font-size: 15px;
+                width: 40px;
+
+                &:hover
+                {
+                    transition: color .2s ease-in, background .2s ease-in;
+                }
+            }
+
+            & .complete-todo-btn
+            {
+                color: var(--todo-item-complete-btn-color);
+                transition: color .2s ease-in, background .2s ease-in;
+
+                &:hover
+                {
+                    color: var(--todo-item-complete-btn-hover-color);
+                    background-color: var(--todo-item-complete-btn-hover-background-color);
+                }
+            }
+
+            & .delete-todo-btn
+            {
+                color: var(--todo-item-delete-btn-color);
+                background-color: var(--todo-item-btn-background-color);
+                transition: color .2s ease-in, background .2s ease-in;
+
+                &:hover
+                {
+                    color: var(--todo-item-delete-btn-hover-color);
+                    background-color: var(--todo-item-delete-btn-hover-background-color);
+                }
+            }
+        }
+    }
+
+}
