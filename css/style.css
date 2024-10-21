@@ -72,6 +72,11 @@ button.btn.add-todo-btn
                 {
                     transition: color .2s ease-in, background .2s ease-in;
                 }
+
+                & i
+                {
+                    pointer-events: none;
+                }
             }
 
             & .complete-todo-btn
@@ -98,6 +103,11 @@ button.btn.add-todo-btn
                     background-color: var(--todo-item-delete-btn-hover-background-color);
                 }
             }
+        }
+
+        & .todo-text-content-container
+        {
+            width: 100%;
         }
     }
 

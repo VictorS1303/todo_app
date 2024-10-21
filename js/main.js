@@ -75,6 +75,9 @@ function addItemToDOM()
     // Create Todo Text
     const todoText = createTodoText('todo-item-text')
 
+    // Create Todo Text Content Container
+    const todoTextContentContainer = createTodoTextContentContainer('container todo-text-content-container d-flex jc-space_around')
+
     // Create Amount Container
     const amountContainer = createAmountContainer('amount-container d-flex jc-center ai-center')
 
@@ -96,10 +99,12 @@ function addItemToDOM()
     // Create Delete Todo Button Icon
     const deleteTodoBtnIcon = createDeleteTodoBtnIcon('fas fa-trash-alt')
 
+    todoTextContentContainer.append(todoText, amountContainer)
+
     // Append amountParagraph to amountContainer
     amountContainer.appendChild(amountParagraph)
 
-    // Append completeTOdoBtn and deleteTodoBtn to listItemControlsContainer
+    // Append completeTodoBtn and deleteTodoBtn to listItemControlsContainer
     listItemControlsContainer.append(completeTodoBtn, deleteTodoBtn)
 
     // Append icon to completeTodoBtn
@@ -109,7 +114,7 @@ function addItemToDOM()
     deleteTodoBtn.appendChild(deleteTodoBtnIcon)
 
     // Call appendItems with all its parameters
-    appendItems(ul, li, todoText, amountContainer, listItemControlsContainer, completeTodoBtn, deleteTodoBtn)
+    appendItems(ul, li, todoTextContentContainer, listItemControlsContainer, completeTodoBtn, deleteTodoBtn)
 }
 
 // Append Items
@@ -150,6 +155,13 @@ function createTodoText(todoTextClasses)
     todoText.className = todoTextClasses
     todoText.textContent = todoInput.value
     return todoText
+}
+
+function createTodoTextContentContainer(todoTextContentContainerClasses)
+{
+    const todoTextContentContainer = document.createElement('div')
+    todoTextContentContainer.className = todoTextContentContainerClasses
+    return todoTextContentContainer
 }
 
 // Create Amount Container
@@ -227,12 +239,31 @@ function addTodo()
     
 }
 
-
 function clearInputs()
 {
     todoInput.value = ''
     amountInput.value = ''
 }
+
+// function addToLocalStorage()
+// {
+//     let todos = JSON.parse(localStorage.getItem('todos')) || []
+
+//     // Todo Object
+//     const todoItem =
+//     {
+//         text: todoText,
+//         amount: amountText,
+//         completed: false
+//     }
+
+//     todos.push(todoItem)
+
+//     localStorage.setItem('todos', JSON.stringify(todos))
+// }
+
+
+
 
 
 // function createTodoObject()
