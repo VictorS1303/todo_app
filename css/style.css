@@ -36,7 +36,7 @@ button.btn.add-todo-btn
 
     & ul
     {
-        height: 100%;
+        height: fit-content;
 
         & .amount-container
         {
@@ -54,7 +54,7 @@ button.btn.add-todo-btn
 
         &:not(:last-child)
         {
-            border-bottom: 2px solid #ccc;
+            border-bottom: 6px solid #ccc;
         }
 
         & .container.list-item-controls-container
@@ -151,10 +151,11 @@ button.btn.add-todo-btn
             font-size: 1.05rem;
             background-color: #fff;
             padding: 10px 15px;
-            width: 60%;
+            width: fit-content;
             border-radius: calc(var(--base-border-radius) / 2);
             box-shadow: var(--box-shadow);
             background-color: var(--create-todo-btn-background-color);
+            white-space: nowrap;
             transition: opacity .2s ease-in;
 
             &:hover

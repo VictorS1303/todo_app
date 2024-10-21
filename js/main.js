@@ -3,9 +3,9 @@ const ul = document.querySelector('ul')
 const addTodoBtn = document.querySelector('#add_todo_btn')
 const createTodoBtn = document.querySelector('#create_todo_btn')
 const addTodoInformationContainer = document.querySelector('.add-todo-information-container')
-console.log(addTodoInformationContainer)
-
-
+const todoInput = document.querySelector('#todo_input')
+const amountInput = document.querySelector('#amount_input')
+const amountContainer = document.querySelector('.amount-container')
 
 // EVENT LISTENERS //
 todoAppContainer.addEventListener('click', (e) => checkClickedButton(e))
@@ -58,6 +58,7 @@ function openCreateTodoModal()
 
 function closeCreateTodoModal()
 {
+    addTodo()
     addTodoInformationContainer.close()
 }
 
@@ -147,7 +148,7 @@ function createTodoText(todoTextClasses)
 {
     const todoText = document.createElement('span')
     todoText.className = todoTextClasses
-    todoText.textContent = 'Hey'
+    todoText.textContent = todoInput.value
     return todoText
 }
 
@@ -163,7 +164,7 @@ function createAmountContainer(amountContainerClasses)
 function createAmountParagraph(amountParagraphClasses)
 {
     const amountParagraph = document.createElement('p')
-    amountParagraph.textContent = 'Hey'
+    amountParagraph.textContent = `Amount: ${amountInput.value}`
     amountParagraph.className = amountParagraphClasses
     return amountParagraph
 }
@@ -209,4 +210,41 @@ function createDeleteTodoBtnIcon(deleteTodoBtnIconClasses)
 }
 
 
-addItemToDOM()
+function addTodo()
+{
+    if(todoInput.value.trim() === '')
+    {
+        alert('Please enter a todo item')
+        openCreateTodoModal()
+        return
+    }
+    else
+    {
+        addItemToDOM()
+        clearInputs()
+    }
+
+    
+}
+
+
+function clearInputs()
+{
+    todoInput.value = ''
+    amountInput.value = ''
+}
+
+
+// function createTodoObject()
+// {
+//     const todoObject =
+//     {
+//         todoTitle: todoInput.value,
+//         amount: amountInput.value,
+//         randomId: self.crypto.randomUUID()
+//     }
+
+//     console.log(todoObject.randomId)
+// }
+
+// createTodoObject()
