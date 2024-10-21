@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/framework.css">
+    <link rel="stylesheet" href="css/keyframes.css">
     <script src="https://kit.fontawesome.com/e05f21b32e.js" crossorigin="anonymous"></script>
     <script src="js/main.js" defer></script>
     <title>To Do List</title>
@@ -31,6 +32,27 @@
                 </li>
             </ul>
         </div>
+
+        <dialog class="container add-todo-information-container" id="add_todo_information_container">
+            <header class="ta-center primary-text">
+                <h3>Add Todo</h3>
+            </header>
+
+            <div class="container inputs-container d-flex fd-column">
+                <div>
+                    <label for="todo-title" class="d-block primary-text">Todo:</label>
+                    <input type="text" class="input todo-input" id="todo_input" placeholder="Enter todo">
+                </div>
+                <div>
+                    <label for="todo-title" class="d-block primary-text">Amount</label>
+                    <input type="number" class="input amount-input" id="amount_input" placeholder="Enter amount">
+                </div>
+
+                <button class="btn create-todo-btn as-center primary-text" id="create_todo_btn">
+                    Create Todo
+                </button>
+            </div>
+        </dialog>
     </main>
 
     <button class="btn add-todo-btn" id="add_todo_btn">

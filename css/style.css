@@ -102,3 +102,83 @@ button.btn.add-todo-btn
     }
 
 }
+
+.add-todo-information-container
+{
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--add-todo-information-container-background-color);
+    height: 500px;
+    width: 65vw;
+    max-width: 450px;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--base-border-radius);
+    padding: 0 40px;
+    transition: top .5s ease-in;
+
+    &[open]
+    {
+        top: 50%;
+        transition: top .5s ease-in;
+    }
+
+    & header
+    {
+        margin-top: 25px;
+    }
+
+    & .container.inputs-container
+    {
+        gap: 50px;
+        margin-top: 50px;
+
+        & input
+        {
+            height: 40px;
+            background-color: #fff;
+            width: 100%;
+            text-indent: 10px;
+            border-radius: calc(var(--base-border-radius) / 2);
+            margin-top: 10px;
+        }
+
+        & .create-todo-btn
+        {
+            font-family: inherit;
+            text-transform: uppercase;
+            font-size: 1.05rem;
+            background-color: #fff;
+            padding: 10px 15px;
+            width: 60%;
+            border-radius: calc(var(--base-border-radius) / 2);
+            box-shadow: var(--box-shadow);
+            background-color: var(--create-todo-btn-background-color);
+            transition: opacity .2s ease-in;
+
+            &:hover
+            {
+                opacity: .95;
+                transition: opacity .2s ease-in;
+            }
+
+            &:active
+            {
+                transform: scale(.98);
+                box-shadow: none;
+                transition: none;
+            }
+        }
+    }
+
+    ::backdrop {
+        background-image: linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.6), /* Slightly less opaque for more translucency */
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+        );
+    }
+}
+

@@ -40,12 +40,22 @@
     --add-todo-btn-color: #fff;
     --add-todo-btn-background-color: #2399c1;
 
+    --add-todo-information-container-background-color: #191972;
+    
+    --create-todo-btn-background-color: #2399c1;
+
     /* Radii */
     --base-border-radius: 10px;
 
     /* Shadows */
     --text-shadow: 0 2px 5px rgba(0, 0, 0, .3);
     --box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+
+input[type="number"]
+{
+    -moz-appearance: textfield;
 }
 
 body
@@ -112,4 +122,10 @@ button
 {
     background-color: transparent;
     cursor: pointer;
+}
+
+input
+{
+    font-family: inherit;
+    background-color: transparent;
 }
