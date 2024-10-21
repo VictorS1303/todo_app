@@ -2,8 +2,6 @@
 {
     text-decoration: 1.5px solid line-through;
     color: #ccc;
-    cursor: not-allowed;
-    pointer-events: none;
 
     & .todo-item-text,
     & .amount-container
@@ -15,5 +13,7 @@
     & .complete-todo-btn
     {
         opacity: .2;
+        cursor: not-allowed;
+        pointer-events: none;
     }
 }

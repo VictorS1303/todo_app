@@ -22,7 +22,17 @@ function completeTodo(btn)
     btn.classList.add('completed')
 }
 
+
 // Delete Todo
 function deleteTodo(btn)
 {
+    const isWantingToDeleteTodo = confirm("Are you sure you want to delete the todo?")
+
+    if(!isWantingToDeleteTodo)
+    {
+        return
+    }
+    
+    btn.closest('.todo-list-item').remove()
 }
+
