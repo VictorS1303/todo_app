@@ -3,20 +3,23 @@ const todoAppContainer = document.querySelector('.todo-app-container')
 // EVENT LISTENERS //
 todoAppContainer.addEventListener('click', (e) =>
 {
-    if(e.target.matches('.complete-todo-btn'))
-    {
-        completeTodo(e)
-    }
-    else if(e.target.matches('.delete-todo-btn'))
-    {
-        deleteTodo(e)
-    }
-})
+    const completeBtn = e.target.closest('.complete-todo-btn');
+    const deleteBtn = e.target.closest('.delete-todo-btn');
 
-function completeTodo(e)
+    if (completeBtn)
+    {
+        completeTodo(completeBtn);
+    }
+    else if (deleteBtn)
+    {
+        deleteTodo(deleteBtn);
+    }
+});
+
+function completeTodo(btn)
 {
-    e.target.closest('.todo-list-item').classList.add('completed')
-    e.target.classList.add('completed')
+    btn.closest('.todo-list-item').classList.add('completed');
+    btn.classList.add('completed');
 }
 
 // Delete Todo
