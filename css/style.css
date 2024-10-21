@@ -1,0 +1,27 @@
+button.btn.add-todo-btn
+{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    color: var(--add-todo-btn-color);
+    background-color: var(--add-todo-btn-background-color);
+    box-shadow: var(--box-shadow);
+    height: 50px;
+    width: 50px;
+    opacity: 1;
+    border-radius: calc(var(--base-border-radius) * 5);
+    transition: opacity .15s ease-in;
+
+    &:hover
+    {
+        opacity: .8;
+        transition: opacity .15s ease-in;
+    }
+
+    &:active
+    {
+        transform: scale(.98);
+        box-shadow: none;
+        transition: none;
+    }
+}

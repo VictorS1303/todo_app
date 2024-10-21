@@ -32,6 +32,8 @@
     --todo-item-complete-btn-background-color: #008080;
     --todo-item-delete-color: #fff;
     --todo-item-delete-btn-background-color: #f00;
+    --add-todo-btn-color: #fff;
+    --add-todo-btn-background-color: #2399c1;
 
     /* Radii */
     --base-border-radius: 10px;
@@ -99,4 +101,10 @@ a
 li
 {
     list-style: none;
+}
+
+button
+{
+    background-color: transparent;
+    cursor: pointer;
 }
