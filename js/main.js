@@ -209,4 +209,4 @@ function createDeleteTodoBtnIcon(deleteTodoBtnIconClasses)
 }
 
 
-addItemToDOM()
+// addItemToDOM()
