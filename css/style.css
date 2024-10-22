@@ -83,6 +83,7 @@ button.btn.add-todo-btn
             {
                 color: var(--todo-item-complete-btn-color);
                 transition: color .2s ease-in, background .2s ease-in;
+                width: 40px;
 
                 &:hover
                 {
