@@ -52,12 +52,13 @@
     --box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 }
 
-
+/* Removing the spin buttons from input fields with type "number" */
 input[type="number"]
 {
     -moz-appearance: textfield;
 }
 
+/* Body */
 body
 {
     font-family: 'Open Sans', sans-serif;
@@ -68,11 +69,13 @@ body
     overflow: hidden;
 }
 
+/* Header */
 header
 {
     font-family: inherit;
 }
 
+/* Headings (h1-h6) */
 h1
 {
     font-size: var(--heading-one-font-size);
@@ -103,28 +106,33 @@ h6
     font-size: var(--heading-six-font-size);
 }
 
+/* Paragraphs */
 p
 {
     font-family: inherit;
     font-size: var(--paragraph-font-size);
 }
 
+/* Links */
 a
 {
     text-decoration: none;
 }
 
+/* List Elements */
 li
 {
     list-style: none;
 }
 
+/* Buttons */
 button
 {
     background-color: transparent;
     cursor: pointer;
 }
 
+/* Inputs */
 input
 {
     font-family: inherit;

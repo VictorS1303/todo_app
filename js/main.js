@@ -6,7 +6,6 @@ const createTodoBtn = document.querySelector('#create_todo_btn')
 const addTodoInformationContainer = document.querySelector('.add-todo-information-container')
 const todoInput = document.querySelector('#todo_input')
 const amountInput = document.querySelector('#amount_input')
-const amountContainer = document.querySelector('.amount-container')
 const openDoneTodosContainerBtn = document.querySelector('.open-done-todos-container-btn')
 const closeDoneTodosContainerBtn = document.querySelector('.close-done-todos-container-btn')
 const doneTodosContainer = document.querySelector('.done-todos-container')
@@ -29,8 +28,6 @@ function openDoneTodosContainer()
 {
     doneTodosContainer.showModal()
 }
-
-// openDoneTodosContainer()
 
 function closeDoneTodosContainer()
 {
@@ -70,30 +67,36 @@ function deleteTodo(e)
         return
     }
 
+    accessClickedTodo(e)
+}
+
+function accessClickedTodo(e)
+{
     // Access the clicked list item
     const todoItem = e.target.closest('.todo-list-item')
     
-    if (todoItem)
+    
+    // Check if the item is in the "doneTodosContainer" or "todoContainerUL"
+    if (doneTodosUL.contains(todoItem))
     {
-        // Check if the item is in the "doneTodosContainer" or "todoContainerUL"
-        if (doneTodosUL.contains(todoItem))
-        {
-            // Remove from doneTodosUL
-            doneTodosUL.removeChild(todoItem)
-        }
-        else if (todoContainerUL.contains(todoItem))
-        {
-            // Remove from todoContainerUL
-            todoContainerUL.removeChild(todoItem)
-        }
+        // Remove from doneTodosUL
+        doneTodosUL.removeChild(todoItem)
     }
+    else if (todoContainerUL.contains(todoItem))
+    {
+        // Remove from todoContainerUL
+        todoContainerUL.removeChild(todoItem)
+    }
+    
 }
 
+// Open createTodoModal
 function openCreateTodoModal()
 {
     addTodoInformationContainer.showModal()
 }
 
+// Close createTodoModal
 function closeCreateTodoModal()
 {
     addTodo()
@@ -116,7 +119,7 @@ function addItemToDOM()
     // Create Amount Container
     const amountContainer = createAmountContainer('amount-container d-flex jc-center ai-center')
 
-    // Create amount paragraph
+    // Create Amount Paragraph
     const amountParagraph = createAmountParagraph('amount')
 
     // Create List Item Controls Container
@@ -155,16 +158,16 @@ function addItemToDOM()
 // Append Items
 function appendItems(li, todoText, listItemControlsContainer)
 {
-    // Create a document fragment to avoid unintended text nodes
+    // Create A Document Fragment To Avoid Unintended Text Nodes
     const fragment = document.createDocumentFragment()
 
-    // Append all elements to the fragment
+    // Append All Elements To The Fragment
     li.append(todoText, listItemControlsContainer)
     
-    // Append the li to the fragment
+    // Append The LI To The Fragment
     fragment.appendChild(li)
 
-    // Append fragment to the ul
+    // Append Fragment To The UL
     todoContainerUL.appendChild(fragment)
 }
 
@@ -188,6 +191,7 @@ function createTodoText(todoTextClasses)
     return todoText
 }
 
+// Create Todo Text Content Container
 function createTodoTextContentContainer(todoTextContentContainerClasses)
 {
     const todoTextContentContainer = document.createElement('div')
@@ -252,68 +256,29 @@ function createDeleteTodoBtnIcon(deleteTodoBtnIconClasses)
     return deleteTodoBtnIcon
 }
 
-
+// Add Todo
 function addTodo()
 {
+    // If Todo Input Field Is Empty
     if(todoInput.value.trim() === '')
     {
+        // Alert without closing the modal
         alert('Please enter a todo item')
-        openCreateTodoModal()
         return
     }
     else
     {
+        // Add Item To DOM
         addItemToDOM()
-        clearInputs()
-    }
 
-    
+        // Clear Input Fields
+        clearInputs()
+    }   
 }
 
+// Clear Input Fields
 function clearInputs()
 {
     todoInput.value = ''
     amountInput.value = ''
 }
-
-
-
-
-
-
-
-
-// function addToLocalStorage()
-// {
-//     let todos = JSON.parse(localStorage.getItem('todos')) || []
-
-//     // Todo Object
-//     const todoItem =
-//     {
-//         text: todoText,
-//         amount: amountText,
-//         completed: false
-//     }
-
-//     todos.push(todoItem)
-
-//     localStorage.setItem('todos', JSON.stringify(todos))
-// }
-
-
-
-
-
-// function createTodoObject()
-// {
-//     const todoObject =
-//     {
-//         todoTitle: todoInput.value,
-//         amount: amountInput.value,
-//         randomId: self.crypto.randomUUID()
-//     }
-
-//     console.log(todoObject.randomId)
-// }
-
-// createTodoObject()

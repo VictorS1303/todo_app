@@ -1,3 +1,4 @@
+/* Completed state for completed todo */
 .completed
 {
     text-decoration: 1.5px solid line-through;
@@ -19,89 +20,103 @@
 }
 
 
-/* List Items */
+/* ULs */
 ul
 {
     height: fit-content;
 
+    /* Amount container inside a ul */
     & .amount-container
     {
         gap: 10px;
     }
-}
 
-& ul li
-{
-    height: 45px;
-    width: 100%;
-    background-color: var(--todo-item-background-color);
-    box-shadow: var(--box-shadow);
-    padding-left: 15px;
-
-    & .done-todo-text-content-container
+    /* lis inside a ul */
+    li
     {
+        height: 45px;
         width: 100%;
-    }
+        background-color: var(--todo-item-background-color);
+        box-shadow: var(--box-shadow);
+        padding-left: 15px;
 
-    &:not(:last-child)
-    {
-        border-bottom: 2px solid #ccc;
-    }
+        /* Elements with the class of "done-todo-text-content-container" an li inside a ul */
+        & .done-todo-text-content-container
+        {
+            width: 100%;
+        }
 
-    & .container.list-item-controls-container,
-    & .container.done-list-item-controls-container
-    {
-        height: 100%;
-        border-left: 1.5px solid #ccc;
+        /* All lis but the last */
+        &:not(:last-child)
+        {
+            border-bottom: 2px solid #ccc;
+        }
 
-        & button
+        /* Elements with the class of ".container.list-item-controls-container" or ".container.done-list-item-controls-container" */
+        & .container.list-item-controls-container,
+        & .container.done-list-item-controls-container
         {
             height: 100%;
-            font-size: 15px;
-            width: 40px;
+            border-left: 1.5px solid #ccc;
 
-            &:hover
+            /* Button with above selector as parent */
+            & button
             {
+                height: 100%;
+                font-size: 15px;
+                width: 40px;
+
+                /* Buttons on hover */
+                &:hover
+                {
+                    transition: color .2s ease-in, background .2s ease-in;
+                }
+
+                /* Icons inside the buttons */
+                & i
+                {
+                    pointer-events: none;
+                }
+            }
+
+            /* Elements with the class of "complete-todo-btn" or "undo-complete-todo-btn" with the above selector as parent*/
+            & .complete-todo-btn,
+            & .undo-complete-todo-btn
+            {
+                color: var(--todo-item-complete-btn-color);
                 transition: color .2s ease-in, background .2s ease-in;
+                width: 40px;
+
+                /* Their hover state */
+                &:hover
+                {
+                    color: var(--todo-item-complete-btn-hover-color);
+                    background-color: var(--todo-item-complete-btn-hover-background-color);
+                }
             }
 
-            & i
+            /* Elements with the class of "delete-todo-btn" or "delete-todo-btn" with the above selector as parent*/
+            & .delete-todo-btn,
+            & .delete-complete-todo-btn
             {
-                pointer-events: none;
+                color: var(--todo-item-delete-btn-color);
+                background-color: var(--todo-item-btn-background-color);
+                transition: color .2s ease-in, background .2s ease-in;
+
+                /* Their hover states */
+                &:hover
+                {
+                    color: var(--todo-item-delete-btn-hover-color);
+                    background-color: var(--todo-item-delete-btn-hover-background-color);
+                }
             }
         }
 
-        & .complete-todo-btn,
-        & .undo-complete-todo-btn
+        /* Elements with the class of "todo-text-content-container" with the above selector as parent */
+        & .todo-text-content-container
         {
-            color: var(--todo-item-complete-btn-color);
-            transition: color .2s ease-in, background .2s ease-in;
-            width: 40px;
-
-            &:hover
-            {
-                color: var(--todo-item-complete-btn-hover-color);
-                background-color: var(--todo-item-complete-btn-hover-background-color);
-            }
+            width: 100%;
         }
-
-        & .delete-todo-btn,
-        & .delete-complete-todo-btn
-        {
-            color: var(--todo-item-delete-btn-color);
-            background-color: var(--todo-item-btn-background-color);
-            transition: color .2s ease-in, background .2s ease-in;
-
-            &:hover
-            {
-                color: var(--todo-item-delete-btn-hover-color);
-                background-color: var(--todo-item-delete-btn-hover-background-color);
-            }
-        }
-    }
-
-    & .todo-text-content-container
-    {
-        width: 100%;
     }
 }
+
