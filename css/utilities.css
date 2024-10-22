@@ -17,3 +17,86 @@
         pointer-events: none;
     }
 }
+
+
+/* List Items */
+ul
+{
+    height: fit-content;
+
+    & .amount-container
+    {
+        gap: 10px;
+    }
+}
+
+& ul li
+{
+    height: 45px;
+    width: 100%;
+    background-color: var(--todo-item-background-color);
+    box-shadow: var(--box-shadow);
+    padding-left: 15px;
+
+    &:not(:last-child)
+    {
+        border-bottom: 2px solid #ccc;
+    }
+
+    & .container.list-item-controls-container,
+    & .container.done-list-item-controls-container
+    {
+        height: 100%;
+        border-left: 1.5px solid #ccc;
+
+        & button
+        {
+            height: 100%;
+            font-size: 15px;
+            width: 40px;
+
+            &:hover
+            {
+                transition: color .2s ease-in, background .2s ease-in;
+            }
+
+            & i
+            {
+                pointer-events: none;
+            }
+        }
+
+        & .complete-todo-btn,
+        & .undo-complete-todo-btn
+        {
+            color: var(--todo-item-complete-btn-color);
+            transition: color .2s ease-in, background .2s ease-in;
+            width: 40px;
+
+            &:hover
+            {
+                color: var(--todo-item-complete-btn-hover-color);
+                background-color: var(--todo-item-complete-btn-hover-background-color);
+            }
+        }
+
+        & .delete-todo-btn,
+        & .delete-complete-todo-btn
+        {
+            color: var(--todo-item-delete-btn-color);
+            background-color: var(--todo-item-btn-background-color);
+            transition: color .2s ease-in, background .2s ease-in;
+
+            &:hover
+            {
+                color: var(--todo-item-delete-btn-hover-color);
+                background-color: var(--todo-item-delete-btn-hover-background-color);
+            }
+        }
+    }
+
+    & .todo-text-content-container
+    {
+        width: 100%;
+    }
+}

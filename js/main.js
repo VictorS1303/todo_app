@@ -1,19 +1,42 @@
 const todoAppContainer = document.querySelector('.todo-app-container')
-const ul = document.querySelector('ul')
+const todoContainerUL = document.querySelector('.todo-container-ul')
+const doneTodosUL = document.querySelector('.done-todos-ul')
 const addTodoBtn = document.querySelector('#add_todo_btn')
 const createTodoBtn = document.querySelector('#create_todo_btn')
 const addTodoInformationContainer = document.querySelector('.add-todo-information-container')
 const todoInput = document.querySelector('#todo_input')
 const amountInput = document.querySelector('#amount_input')
 const amountContainer = document.querySelector('.amount-container')
+const openDoneTodosContainerBtn = document.querySelector('.open-done-todos-container-btn')
+const closeDoneTodosContainerBtn = document.querySelector('.close-done-todos-container-btn')
+const doneTodosContainer = document.querySelector('.done-todos-container')
+const deleteCompleteTodoBtn = document.querySelector('.delete-complete-todo-btn')
+
 
 // EVENT LISTENERS //
 todoAppContainer.addEventListener('click', (e) => checkClickedButton(e))
 addTodoBtn.addEventListener('click', openCreateTodoModal)
 createTodoBtn.addEventListener('click', closeCreateTodoModal)
+openDoneTodosContainerBtn.addEventListener('click', openDoneTodosContainer)
+closeDoneTodosContainerBtn.addEventListener('click', closeDoneTodosContainer)
+deleteCompleteTodoBtn.addEventListener('click', (e) => deleteTodo(e))
+
+
 
 
 // FUNCTIONS //
+function openDoneTodosContainer()
+{
+    doneTodosContainer.showModal()
+}
+
+// openDoneTodosContainer()
+
+function closeDoneTodosContainer()
+{
+    doneTodosContainer.close()
+}
+
 
 function checkClickedButton(e)
 {
@@ -26,7 +49,7 @@ function checkClickedButton(e)
     }
     else if (deleteBtn)
     {
-        deleteTodo(deleteBtn)
+        deleteTodo(e)
     }
 }
 
@@ -34,21 +57,36 @@ function checkClickedButton(e)
 function completeTodo(btn)
 {
     btn.closest('.todo-list-item').classList.add('completed')
-    btn.classList.add('completed')
 }
 
 
 // Delete Todo
-function deleteTodo(btn)
+function deleteTodo(e)
 {
     const isWantingToDeleteTodo = confirm("Are you sure you want to delete the todo?")
-
-    if(!isWantingToDeleteTodo)
+    
+    if (!isWantingToDeleteTodo)
     {
         return
     }
+
+    // Access the clicked list item
+    const todoItem = e.target.closest('.todo-list-item')
     
-    btn.closest('.todo-list-item').remove()
+    if (todoItem)
+    {
+        // Check if the item is in the "doneTodosContainer" or "todoContainerUL"
+        if (doneTodosUL.contains(todoItem))
+        {
+            // Remove from doneTodosUL
+            doneTodosUL.removeChild(todoItem)
+        }
+        else if (todoContainerUL.contains(todoItem))
+        {
+            // Remove from todoContainerUL
+            todoContainerUL.removeChild(todoItem)
+        }
+    }
 }
 
 function openCreateTodoModal()
@@ -127,18 +165,11 @@ function appendItems(li, todoText, listItemControlsContainer)
     fragment.appendChild(li)
 
     // Append fragment to the ul
-    ul.appendChild(fragment)
+    todoContainerUL.appendChild(fragment)
 }
 
 
 // Creator Functions //
-
-// Create UL
-function createUL()
-{
-    const ul = document.createElement('ul')
-    return ul
-}
 
 // Create LI
 function createLI(liClasses)
@@ -244,6 +275,13 @@ function clearInputs()
     todoInput.value = ''
     amountInput.value = ''
 }
+
+
+
+
+
+
+
 
 // function addToLocalStorage()
 // {

@@ -60,11 +60,12 @@ input[type="number"]
 
 body
 {
+    font-family: 'Open Sans', sans-serif;
     display: grid;
     place-content: center;
     min-height: 100vh;
-    font-family: 'Open Sans', sans-serif;
-    background: var(--body-background-color);
+    background: var(--body-background-color) no-repeat center center/cover;
+    overflow: hidden;
 }
 
 header

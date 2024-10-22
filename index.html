@@ -19,7 +19,7 @@
 
     <main>
         <div class="container todo-app-container ai-baseline">
-            <ul></ul>
+            <ul class="todo-container-ul"></ul>
         </div>
 
         <dialog class="container add-todo-information-container" id="add_todo_information_container">
@@ -43,6 +43,41 @@
             </div>
         </dialog>
     </main>
+
+    
+    
+    <!-- Done Todos Container -->
+    <button class="btn open-done-todos-container-btn" id="open_done_todos_container">
+        <i class="fas fa-list"></i>
+    </button>
+
+    <dialog class="container done-todos-container" id="done_todos_container">
+        <header>
+            <h3>Done Todos</h3>
+        </header>
+        <button class="btn close-done-todos-container-btn" id="close_done_todos_container_btn">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <ul class="done-todos-ul">
+            <li class="item done-todo-list-item d-flex jc-space_between ai-center">
+                <div class="container done-todo-text-content-container d-flex jc-space_around">
+                    <span class="done-todo-item-text">Hey</span>
+                    <span class="amount-container d-flex jc-center ai-center">
+                        <p class="amount">Amount: 30</p>
+                    </span>
+                </div>
+                <div class="container done-list-item-controls-container d-flex">
+                    <button class="btn undo-complete-todo-btn">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                    <button class="btn delete-complete-todo-btn">
+                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </dialog>
 
     <button class="btn add-todo-btn" id="add_todo_btn">
         <i class="fas fa-plus fa-2x"></i>
