@@ -3,9 +3,9 @@ const ul = document.querySelector('ul')
 const addTodoBtn = document.querySelector('#add_todo_btn')
 const createTodoBtn = document.querySelector('#create_todo_btn')
 const addTodoInformationContainer = document.querySelector('.add-todo-information-container')
-console.log(addTodoInformationContainer)
-
-
+const todoInput = document.querySelector('#todo_input')
+const amountInput = document.querySelector('#amount_input')
+const amountContainer = document.querySelector('.amount-container')
 
 // EVENT LISTENERS //
 todoAppContainer.addEventListener('click', (e) => checkClickedButton(e))
@@ -58,6 +58,7 @@ function openCreateTodoModal()
 
 function closeCreateTodoModal()
 {
+    addTodo()
     addTodoInformationContainer.close()
 }
 
@@ -73,6 +74,9 @@ function addItemToDOM()
 
     // Create Todo Text
     const todoText = createTodoText('todo-item-text')
+
+    // Create Todo Text Content Container
+    const todoTextContentContainer = createTodoTextContentContainer('container todo-text-content-container d-flex jc-space_around')
 
     // Create Amount Container
     const amountContainer = createAmountContainer('amount-container d-flex jc-center ai-center')
@@ -95,10 +99,12 @@ function addItemToDOM()
     // Create Delete Todo Button Icon
     const deleteTodoBtnIcon = createDeleteTodoBtnIcon('fas fa-trash-alt')
 
+    todoTextContentContainer.append(todoText, amountContainer)
+
     // Append amountParagraph to amountContainer
     amountContainer.appendChild(amountParagraph)
 
-    // Append completeTOdoBtn and deleteTodoBtn to listItemControlsContainer
+    // Append completeTodoBtn and deleteTodoBtn to listItemControlsContainer
     listItemControlsContainer.append(completeTodoBtn, deleteTodoBtn)
 
     // Append icon to completeTodoBtn
@@ -108,7 +114,7 @@ function addItemToDOM()
     deleteTodoBtn.appendChild(deleteTodoBtnIcon)
 
     // Call appendItems with all its parameters
-    appendItems(ul, li, todoText, amountContainer, listItemControlsContainer, completeTodoBtn, deleteTodoBtn)
+    appendItems(ul, li, todoTextContentContainer, listItemControlsContainer, completeTodoBtn, deleteTodoBtn)
 }
 
 // Append Items
@@ -147,8 +153,15 @@ function createTodoText(todoTextClasses)
 {
     const todoText = document.createElement('span')
     todoText.className = todoTextClasses
-    todoText.textContent = 'Hey'
+    todoText.textContent = todoInput.value
     return todoText
+}
+
+function createTodoTextContentContainer(todoTextContentContainerClasses)
+{
+    const todoTextContentContainer = document.createElement('div')
+    todoTextContentContainer.className = todoTextContentContainerClasses
+    return todoTextContentContainer
 }
 
 // Create Amount Container
@@ -163,7 +176,7 @@ function createAmountContainer(amountContainerClasses)
 function createAmountParagraph(amountParagraphClasses)
 {
     const amountParagraph = document.createElement('p')
-    amountParagraph.textContent = 'Hey'
+    amountParagraph.textContent = `Amount: ${amountInput.value}`
     amountParagraph.className = amountParagraphClasses
     return amountParagraph
 }
@@ -209,4 +222,60 @@ function createDeleteTodoBtnIcon(deleteTodoBtnIconClasses)
 }
 
 
-// addItemToDOM()
+function addTodo()
+{
+    if(todoInput.value.trim() === '')
+    {
+        alert('Please enter a todo item')
+        openCreateTodoModal()
+        return
+    }
+    else
+    {
+        addItemToDOM()
+        clearInputs()
+    }
+
+    
+}
+
+function clearInputs()
+{
+    todoInput.value = ''
+    amountInput.value = ''
+}
+
+// function addToLocalStorage()
+// {
+//     let todos = JSON.parse(localStorage.getItem('todos')) || []
+
+//     // Todo Object
+//     const todoItem =
+//     {
+//         text: todoText,
+//         amount: amountText,
+//         completed: false
+//     }
+
+//     todos.push(todoItem)
+
+//     localStorage.setItem('todos', JSON.stringify(todos))
+// }
+
+
+
+
+
+// function createTodoObject()
+// {
+//     const todoObject =
+//     {
+//         todoTitle: todoInput.value,
+//         amount: amountInput.value,
+//         randomId: self.crypto.randomUUID()
+//     }
+
+//     console.log(todoObject.randomId)
+// }
+
+// createTodoObject()
