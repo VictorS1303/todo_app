@@ -66,9 +66,6 @@ function closeCreateTodoModal()
 // TODO ITEM //
 function addItemToDOM()
 {
-    // Create UL
-    const ul = createUL()
-
     // Create LI
     const li = createLI('item todo-list-item d-flex jc-space_between ai-center')
 
@@ -114,20 +111,23 @@ function addItemToDOM()
     deleteTodoBtn.appendChild(deleteTodoBtnIcon)
 
     // Call appendItems with all its parameters
-    appendItems(ul, li, todoTextContentContainer, listItemControlsContainer, completeTodoBtn, deleteTodoBtn)
+    appendItems(li, todoTextContentContainer, listItemControlsContainer)
 }
 
 // Append Items
-function appendItems(ul, li, todoText, amountContainer, listItemControlsContainer)
+function appendItems(li, todoText, listItemControlsContainer)
 {
-    // Append UL to todoAppContainer
-    todoAppContainer.appendChild(ul)
+    // Create a document fragment to avoid unintended text nodes
+    const fragment = document.createDocumentFragment()
 
-    // Append li to ul
-    ul.appendChild(li)
+    // Append all elements to the fragment
+    li.append(todoText, listItemControlsContainer)
+    
+    // Append the li to the fragment
+    fragment.appendChild(li)
 
-    // Append to li
-    li.append(todoText, amountContainer, listItemControlsContainer)
+    // Append fragment to the ul
+    ul.appendChild(fragment)
 }
 
 
