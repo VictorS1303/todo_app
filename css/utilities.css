@@ -38,6 +38,11 @@ ul
     box-shadow: var(--box-shadow);
     padding-left: 15px;
 
+    & .done-todo-text-content-container
+    {
+        width: 100%;
+    }
+
     &:not(:last-child)
     {
         border-bottom: 2px solid #ccc;
