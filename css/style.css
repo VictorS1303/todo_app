@@ -149,14 +149,22 @@ button.btn.add-todo-btn
     }
 
     /* All icons inside buttons with above selector as parent except ".undo-complete-todo-btn" and ".delete-complete-todo-btn" */
-    & button:not(.undo-complete-todo-btn, .delete-complete-todo-btn) i
+    & button:not(.undo-complete-todo-btn, .delete-complete-todo-btn, .delete-all-completed-todos-btn) i
     {
         position: absolute;
         top: 20px;
         right: 20px;
         font-size: 25px;
         color: var(--todo-item-complete-btn-color);
+    }
 
+    .delete-all-completed-todos-btn
+    {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 20px;
+        color: var(--todo-item-delete-btn-color);
     }
 
     /* Dialog backdrop */

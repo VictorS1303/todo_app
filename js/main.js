@@ -10,7 +10,10 @@ const amountInput = document.querySelector('#amount_input')
 const openDoneTodosContainerBtn = document.querySelector('.open-done-todos-container-btn')
 const closeDoneTodosContainerBtn = document.querySelector('.close-done-todos-container-btn')
 const doneTodosContainer = document.querySelector('.done-todos-container')
-const deleteCompleteTodoBtn = document.querySelector('.delete-complete-todo-btn')
+const deleteAllCompletedTodosBtn = document.querySelector('.delete-all-completed-todos-btn')
+
+
+
 
 // EMPTY ARRAYS FOR LOCAL STORAGE
 let todoArray = []
@@ -31,10 +34,8 @@ addTodoBtn.addEventListener('click', openCreateTodoModal)
 createTodoBtn.addEventListener('click', closeCreateTodoModal)
 openDoneTodosContainerBtn.addEventListener('click', openCompleteTodosContainer)
 closeDoneTodosContainerBtn.addEventListener('click', closeDoneTodosContainer)
-deleteCompleteTodoBtn.addEventListener('click', (e) => deleteTodo(e))
-
-
-
+deleteAllCompletedTodosBtn.addEventListener('click', deleteAllCompletedTodos)
+doneTodosContainer.addEventListener('click', (e) => checkClickedButtonInCompletedTodo(e))
 
 // FUNCTIONS //
 
@@ -90,6 +91,80 @@ function checkClickedButton(e)
     }
 }
 
+function checkClickedButtonInCompletedTodo(e)
+{
+    const undoCompleteTodoBtn = e.target.closest('.undo-complete-todo-btn')
+    const deleteCompleteTodoBtn = e.target.closest('.delete-complete-todo-btn')
+
+    if (undoCompleteTodoBtn)
+    {
+        undoCompleteTodo(e)
+    }
+
+    if (deleteCompleteTodoBtn)
+    {
+        deleteCompleteTodo(e)
+    }
+}
+
+// Undo complete todo
+function undoCompleteTodo(e)
+{
+    // Get the clicked completed todo item
+    const completedTodoItem = e.target.closest('.done-todo-list-item')
+
+    // Get the text and amount of the completed todo
+    const todoText = completedTodoItem.querySelector('.done-todo-item-text').textContent
+    const todoAmount = completedTodoItem.querySelector('.amount').textContent
+
+    // Remove the todo from the DOM (completed list)
+    completedTodoItem.remove()
+
+    // Remove from completeTodos array and update localStorage
+    completeTodos = completeTodos.filter(todo => todo.todoTitle !== todoText)
+    
+    // Reuse the existing function to remove the todo from completeTodos in localStorage
+    localStorage.setItem('completeTodos', JSON.stringify(completeTodos))
+
+    // Add the todo back to the active list using your existing addItemToDOM function
+    addItemToDOM(todoAmount, todoText)
+
+    // Add it back to the todoArray and update localStorage
+    populateTodoObject()
+
+    // Update both arrays in localStorage using your existing updateLocalStorage function
+    updateLocalStorage();
+}
+
+
+// Delete complete todo
+function deleteCompleteTodo(e) {
+    // Confirm if the user wants to delete this completed todo
+    const isWantingToDeleteTodo = confirm("Are you sure you want to delete this completed todo?");
+
+    // If the user doesn't want to delete, exit the function
+    if (!isWantingToDeleteTodo) {
+        return;
+    }
+
+    // Get the clicked completed todo item
+    const completedTodoItem = e.target.closest('.done-todo-list-item');
+
+    // Get the text of the completed todo
+    const todoText = completedTodoItem.querySelector('.done-todo-item-text').textContent;
+
+    // Remove the todo from the DOM (completed list)
+    completedTodoItem.remove();
+
+    // Remove the todo from completeTodos array
+    completeTodos = completeTodos.filter(todo => todo.todoTitle !== todoText);
+
+    // Update the completeTodos in localStorage
+    localStorage.setItem('completeTodos', JSON.stringify(completeTodos));
+}
+
+
+
 // Complete Todo
 function completeTodo(e)
 {
@@ -106,8 +181,6 @@ function completeTodo(e)
     // Immediately add the task to the completeTodos list in the DOM
     addCompletedItemToDOM(currentCompleteTodoAmount, currentCompleteTodoText)
 }
-
-
 
 // Delete Todo
 function deleteTodo(e)
@@ -505,6 +578,34 @@ function appendCompleteTodoItem(completeLI, completeTodoTextContentContainer, co
 }
 
 
+// Delete All Completed Todos
+function deleteAllCompletedTodos()
+{
+    // Confirm if the user really wants to delete all completed todos
+    const isWantingToDeleteAllCompletedNotes = confirm("Are you sure you want to delete all completed todos?");
+    
+    // If the user doesn't want to delete all completed todos, exit the function
+    if (!isWantingToDeleteAllCompletedNotes)
+    {
+        return
+    }
+
+    // Remove all completed todos from the DOM
+    while (completeTodosUL.firstChild)
+    {
+        completeTodosUL.removeChild(completeTodosUL.firstChild);
+    }
+
+    // Clear the completeTodos array
+    completeTodos = [];
+
+    // Update localStorage to remove completed todos
+    localStorage.setItem('completeTodos', JSON.stringify(completeTodos));
+
+}
+
+
+
 // LOCAL STORAGE //
 
 // Load localStorage (being called upon window load)
@@ -591,6 +692,7 @@ function removeFromLocalStorage(todoTitleToRemove)
         }
     })
 }
+
 
 
 // Clear inputs
