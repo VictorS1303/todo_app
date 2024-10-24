@@ -133,34 +133,34 @@ function undoCompleteTodo(e)
     populateTodoObject()
 
     // Update both arrays in localStorage using your existing updateLocalStorage function
-    updateLocalStorage();
+    updateLocalStorage()
 }
 
 
 // Delete complete todo
 function deleteCompleteTodo(e) {
     // Confirm if the user wants to delete this completed todo
-    const isWantingToDeleteTodo = confirm("Are you sure you want to delete this completed todo?");
+    const isWantingToDeleteTodo = confirm("Are you sure you want to delete this completed todo?")
 
     // If the user doesn't want to delete, exit the function
     if (!isWantingToDeleteTodo) {
-        return;
+        return
     }
 
     // Get the clicked completed todo item
-    const completedTodoItem = e.target.closest('.done-todo-list-item');
+    const completedTodoItem = e.target.closest('.done-todo-list-item')
 
     // Get the text of the completed todo
-    const todoText = completedTodoItem.querySelector('.done-todo-item-text').textContent;
+    const todoText = completedTodoItem.querySelector('.done-todo-item-text').textContent
 
     // Remove the todo from the DOM (completed list)
-    completedTodoItem.remove();
+    completedTodoItem.remove()
 
     // Remove the todo from completeTodos array
-    completeTodos = completeTodos.filter(todo => todo.todoTitle !== todoText);
+    completeTodos = completeTodos.filter(todo => todo.todoTitle !== todoText)
 
     // Update the completeTodos in localStorage
-    localStorage.setItem('completeTodos', JSON.stringify(completeTodos));
+    localStorage.setItem('completeTodos', JSON.stringify(completeTodos))
 }
 
 
@@ -196,7 +196,8 @@ function deleteTodo(e)
         and the function does not run the deleteTodo function.
         This is done to prevent accidental deletion of a todo.
     */
-    if (!isWantingToDeleteTodo) {
+    if (!isWantingToDeleteTodo)
+    {
         return
     }
 
@@ -415,8 +416,8 @@ function addTodo()
 
 function populateTodoObject()
 {
-    const todoTitle = todoInput.value.trim();
-    const todoAmount = amountInput.value.trim();
+    const todoTitle = todoInput.value.trim()
+    const todoAmount = amountInput.value.trim()
 
     // Only create a todo object if both values are not empty
     if (todoTitle !== '' && todoAmount !== '')
@@ -427,12 +428,12 @@ function populateTodoObject()
             todoAmount: todoAmount,
         }
 
-        todoArray.push(todoObject);
-        localStorage.setItem('todo', JSON.stringify(todoArray));
+        todoArray.push(todoObject)
+        localStorage.setItem('todo', JSON.stringify(todoArray))
     }
     else
     {
-        alert('Please enter valid todo details');
+        alert('Please enter valid todo details')
     }
 }
 
@@ -590,7 +591,7 @@ function appendCompleteTodoItem(completeLI, completeTodoTextContentContainer, co
 function deleteAllCompletedTodos()
 {
     // Confirm if the user really wants to delete all completed todos
-    const isWantingToDeleteAllCompletedNotes = confirm("Are you sure you want to delete all completed todos?");
+    const isWantingToDeleteAllCompletedNotes = confirm("Are you sure you want to delete all completed todos?")
     
     // If the user doesn't want to delete all completed todos, exit the function
     if (!isWantingToDeleteAllCompletedNotes)
@@ -601,14 +602,14 @@ function deleteAllCompletedTodos()
     // Remove all completed todos from the DOM
     while (completeTodosUL.firstChild)
     {
-        completeTodosUL.removeChild(completeTodosUL.firstChild);
+        completeTodosUL.removeChild(completeTodosUL.firstChild)
     }
 
     // Clear the completeTodos array
-    completeTodos = [];
+    completeTodos = []
 
     // Update localStorage to remove completed todos
-    localStorage.setItem('completeTodos', JSON.stringify(completeTodos));
+    localStorage.setItem('completeTodos', JSON.stringify(completeTodos))
 
 }
 
@@ -656,7 +657,7 @@ function displayFromLocalStorage()
         // Check if the todoTitle and todoAmount are not empty
         if (todo.todoTitle.trim() !== '' && todo.todoAmount.trim() !== '')
         {
-            addItemToDOM(todo.todoAmount, todo.todoTitle);
+            addItemToDOM(todo.todoAmount, todo.todoTitle)
         }
     })
 }
@@ -675,7 +676,7 @@ function displayCompletedTodosFromLocalStorage()
         // Check if the todoTitle and todoAmount are not empty
         if (completedTodo.todoTitle.trim() !== '' && completedTodo.todoAmount.trim() !== '')
         {
-            addCompletedItemToDOM(completedTodo.todoAmount, completedTodo.todoTitle);
+            addCompletedItemToDOM(completedTodo.todoAmount, completedTodo.todoTitle)
         }
     })
 }
