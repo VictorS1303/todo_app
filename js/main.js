@@ -415,17 +415,25 @@ function addTodo()
 
 function populateTodoObject()
 {
-    const todoObject =
+    const todoTitle = todoInput.value.trim();
+    const todoAmount = amountInput.value.trim();
+
+    // Only create a todo object if both values are not empty
+    if (todoTitle !== '' && todoAmount !== '')
     {
-        todoTitle: todoInput.value,
-        todoAmount: amountInput.value,
+        const todoObject =
+        {
+            todoTitle: todoTitle,
+            todoAmount: todoAmount,
+        }
+
+        todoArray.push(todoObject);
+        localStorage.setItem('todo', JSON.stringify(todoArray));
     }
-
-    todoArray.push(todoObject)
-
-    let todoString = JSON.stringify(todoArray)
-
-    localStorage.setItem('todo', todoString)
+    else
+    {
+        alert('Please enter valid todo details');
+    }
 }
 
 
