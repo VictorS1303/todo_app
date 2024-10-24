@@ -1,3 +1,4 @@
+// VARIABLES //
 const todoAppContainer = document.querySelector('.todo-app-container')
 const todoContainerUL = document.querySelector('.todo-container-ul')
 const completeTodosUL = document.querySelector('.done-todos-ul')
@@ -12,9 +13,14 @@ const closeDoneTodosContainerBtn = document.querySelector('.close-done-todos-con
 const doneTodosContainer = document.querySelector('.done-todos-container')
 const deleteCompleteTodoBtn = document.querySelector('.delete-complete-todo-btn')
 
+// EMPTY ARRAYS FOR LOCAL STORAGE
 let todoArray = []
 let completeTodos = []
 
+/*
+    INITIAL VALUES FOR COMPLETE currentCompleteTodoText and currentCompleteTodoAmount
+    (the text in the completed todos)
+*/
 let currentCompleteTodoText = ''
 let currentCompleteTodoAmount = 0
 
@@ -24,7 +30,7 @@ window.addEventListener('DOMContentLoaded', loadLocalStorage)
 todoAppContainer.addEventListener('click', (e) => checkClickedButton(e))
 addTodoBtn.addEventListener('click', openCreateTodoModal)
 createTodoBtn.addEventListener('click', closeCreateTodoModal)
-openDoneTodosContainerBtn.addEventListener('click', openDoneTodosContainer)
+openDoneTodosContainerBtn.addEventListener('click', openCompleteTodosContainer)
 closeDoneTodosContainerBtn.addEventListener('click', closeDoneTodosContainer)
 deleteCompleteTodoBtn.addEventListener('click', (e) => deleteTodo(e))
 
@@ -33,55 +39,59 @@ deleteCompleteTodoBtn.addEventListener('click', (e) => deleteTodo(e))
 
 // FUNCTIONS //
 
-function loadLocalStorage()
-{
-    // Load active todos
-    const getTodos = localStorage.getItem('todo')
 
-    if (getTodos)
-    {
-        todoArray = JSON.parse(getTodos)
-        displayFromLocalStorage()
-    }
-
-    // Load completed todos
-    const getCompleteTodos = localStorage.getItem('completeTodos')
-    if (getCompleteTodos)
-    {
-        completeTodos = JSON.parse(getCompleteTodos)
-        displayCompletedTodosFromLocalStorage()
-    }
-}
-
-function openDoneTodosContainer()
+// Open complete todos container
+function openCompleteTodosContainer()
 {
     doneTodosContainer.showModal()
 }
 
-// openDoneTodosContainer()
-
+// Close complete todos container
 function closeDoneTodosContainer()
 {
     doneTodosContainer.close()
 }
 
+// Open createTodoModal
+function openCreateTodoModal()
+{
+    addTodoInformationContainer.showModal()
+}
 
+// Close createTodoModal
+function closeCreateTodoModal()
+{
+    addTodo()
+    addTodoInformationContainer.close()
+}
+
+/*
+    This function takes care of checking, which button has been clicked in the todo in the todos container
+    using event delegation.
+    If complete button, then complete the task.
+    If delete button, then delete the task
+*/
 function checkClickedButton(e)
 {
+    // Clicking the completeBtn 
     const completeBtn = e.target.closest('.complete-todo-btn')
+
+    // Clicking the deleteBtn
     const deleteBtn = e.target.closest('.delete-todo-btn')
 
+    // Run the completeTodo function if completeBtn is clicked
     if (completeBtn)
     {
         completeTodo(e)
     }
+    // Run the deleteTodo function if deleteBtn is clicked
     else if (deleteBtn)
     {
         deleteTodo(e)
     }
 }
 
-
+// Complete Todo
 function completeTodo(e)
 {
     // Get the current todo text and amount
@@ -98,68 +108,54 @@ function completeTodo(e)
     addCompletedItemToDOM(currentCompleteTodoAmount, currentCompleteTodoText)
 }
 
-function updateLocalStorage()
-{
-    // Save both the todoArray and completeTodos arrays in localStorage
-    localStorage.setItem('todo', JSON.stringify(todoArray))
-    localStorage.setItem('completeTodos', JSON.stringify(completeTodos))
-}
 
-function removeFromLocalStorage(todoTitleToRemove)
-{
-    // Loop through the todoArray to find the matching todo and remove it
-    todoArray.forEach((todo, index) => {
-        if (todo.todoTitle === todoTitleToRemove) {
-            const completeTodo = todoArray.splice(index, 1)[0] // Remove from todoArray
-            completeTodos.push(completeTodo) // Add to completeTodos
-
-            // Update localStorage after moving the task to completeTodos
-            updateLocalStorage()
-        }
-    })
-}
 
 // Delete Todo
 function deleteTodo(e)
 {
+    /*
+        Creating a confirm to show up, when the deleteTodoBtn has been clicked,
+        so that the user doesn't delete a todo accidentally 
+    */
     const isWantingToDeleteTodo = confirm("Are you sure you want to delete the todo?")
     
+    /*
+        If the user doesn't want to delete the todo, the function stops here,
+        and the function does not run the deleteTodo function.
+        This is done to prevent accidental deletion of a todo.
+    */
     if (!isWantingToDeleteTodo) {
         return
     }
 
     // Access the clicked list item
     const todoItem = e.target.closest('.todo-list-item')
+    
+    // Get the title of the todo from the DOM element
+    const todoTitleToRemove = todoItem.querySelector('.todo-item-text').textContent
 
-    if (todoItem) {
-        // Get the title of the todo from the DOM element (assuming the title is stored as text)
-        const todoTitleToRemove = todoItem.querySelector('.todo-item-text').textContent
-
-        // Check if the item is in the "doneTodosContainer" or "todoContainerUL"
-        if (completeTodosUL.contains(todoItem)) {
-            // Remove from completeTodosUL (completed tasks)
-            completeTodosUL.removeChild(todoItem)
-        } else if (todoContainerUL.contains(todoItem)) {
-            // Remove from todoContainerUL (active tasks)
-            todoContainerUL.removeChild(todoItem)
-
-            // Pass the title to the function to remove it from localStorage and move it to completed tasks
-            removeFromLocalStorage(todoTitleToRemove)
-        }
+    // Check if the item is in the "doneTodosContainer" or "todoContainerUL"
+    if (completeTodosUL.contains(todoItem))
+    {
+        // Remove from completeTodosUL (completed tasks)
+        completeTodosUL.removeChild(todoItem)
     }
+    else if (todoContainerUL.contains(todoItem))
+    {
+        // Remove from todoContainerUL (active tasks)
+        todoContainerUL.removeChild(todoItem)
+
+        // Pass the title to the function to remove it from localStorage and move it to completed tasks
+        removeFromLocalStorage(todoTitleToRemove)
+    }
+    
 }
 
-function openCreateTodoModal()
-{
-    addTodoInformationContainer.showModal()
-}
 
-function closeCreateTodoModal()
-{
-    addTodo()
-    addTodoInformationContainer.close()
-}
 
+
+
+// CREATE TODO ITEM //
 
 // TODO ITEM //
 function addItemToDOM(amountvalue, todoname)
@@ -214,22 +210,6 @@ function addItemToDOM(amountvalue, todoname)
     
 }
 
-function displayFromLocalStorage()
-{
-    todoArray.forEach((todo) =>
-    {
-        addItemToDOM(todo.todoAmount, todo.todoTitle)
-    })
-}
-
-function displayCompletedTodosFromLocalStorage()
-{
-    completeTodos.forEach((completedTodo) =>
-    {
-        addCompletedItemToDOM(completedTodo.todoAmount, completedTodo.todoTitle)
-    })
-}
-
 // Append Items
 function appendItems(li, todoText, listItemControlsContainer)
 {
@@ -248,7 +228,6 @@ function appendItems(li, todoText, listItemControlsContainer)
 
 
 // Creator Functions //
-
 // Create LI
 function createLI(liClasses)
 {
@@ -256,6 +235,15 @@ function createLI(liClasses)
     li.className = liClasses
     return li
 }
+
+
+/*
+    Common for the following creator functions is that they all create an element for their specific
+    purpose. They each take a parameter named after, what classes they get. The element's .className is set equal
+    to this parameter, and the argument is passed as a string to the call of each function in the addItemToDOM() function.
+    
+    Note, that the elements that contain text have an extra parameter called "value", too.
+*/
 
 // Create Todo Text
 function createTodoText(todoTextClasses, value)
@@ -330,7 +318,6 @@ function createDeleteTodoBtnIcon(deleteTodoBtnIconClasses)
     return deleteTodoBtnIcon
 }
 
-
 function addTodo()
 {
     if(todoInput.value.trim() === '')
@@ -363,7 +350,7 @@ function populateTodoObject()
 }
 
 
-// DONE TODOS //
+// COMPLETE TODOS //
 
 // Create Complete LI
 function createCompleteLI(completeLIClasses)
@@ -511,11 +498,98 @@ function appendCompleteTodoItem(completeLI, completeTodoTextContentContainer, co
     deleteCompleteTodoBtn.append(deleteCompleteTodoBtnIcon)
 }
 
+
+// LOCAL STORAGE //
+
+// Load localStorage (being called upon window load)
+function loadLocalStorage()
+{
+    // Load active todos
+    const getTodos = localStorage.getItem('todo')
+
+    /*
+        If there are any todos, they get parsed from a JSON string
+        into the todoArray
+    */
+    if (getTodos)
+    {
+        todoArray = JSON.parse(getTodos)
+
+        // Display from localStorage, if any todos are present
+        displayFromLocalStorage()
+    }
+
+    // Load completed todos
+    const getCompleteTodos = localStorage.getItem('completeTodos')
+    if (getCompleteTodos)
+    {
+        completeTodos = JSON.parse(getCompleteTodos)
+        displayCompletedTodosFromLocalStorage()
+    }
+}
+
+function displayFromLocalStorage()
+{
+    /*
+        Looping through the todoArray to get each todo.
+    */
+    todoArray.forEach((todo) =>
+    {
+        // Adding the text content from each todo in the todo container
+        addItemToDOM(todo.todoAmount, todo.todoTitle)
+    })
+}
+
+// Display completed todos
+function displayCompletedTodosFromLocalStorage()
+{
+    /*
+        Looping through the completeTodos to get each completed todo
+    */
+    completeTodos.forEach((completedTodo) =>
+    {
+        // Adding the text content from each todo in the completedTodosContainer
+        addCompletedItemToDOM(completedTodo.todoAmount, completedTodo.todoTitle)
+    })
+}
+
+// Update localStorage
+function updateLocalStorage()
+{
+    // Save both the todoArray and completeTodos arrays in localStorage
+    localStorage.setItem('todo', JSON.stringify(todoArray))
+    localStorage.setItem('completeTodos', JSON.stringify(completeTodos))
+}
+
+// Remove from localStorage
+function removeFromLocalStorage(todoTitleToRemove)
+{
+    /*
+        Loop through the todoArray to find the matching todo and remove it
+    */
+    todoArray.forEach((todo, index) =>
+    {
+        /*
+            If todoTitle is equal to the title of the todo wanted to be deleted,
+            then the todo gets removed
+        */
+        if (todo.todoTitle === todoTitleToRemove) {
+            // If match is found, remove todo from todoArray and return the todo.
+            const completeTodo = todoArray.splice(index, 1)[0] // Remove from todoArray
+
+            // Push the completeTodo to the completeTodos array
+            completeTodos.push(completeTodo)
+
+            // Update localStorage after moving the task to completeTodos
+            updateLocalStorage()
+        }
+    })
+}
+
+
+// Clear inputs
 function clearInputs()
 {
     todoInput.value = ''
     amountInput.value = ''
 }
-
-
-
