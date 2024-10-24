@@ -644,6 +644,12 @@ function displayFromLocalStorage()
     {
         // Adding the text content from each todo in the todo container
         addItemToDOM(todo.todoAmount, todo.todoTitle)
+
+        // Check if the todoTitle and todoAmount are not empty
+        if (todo.todoTitle.trim() !== '' && todo.todoAmount.trim() !== '')
+        {
+            addItemToDOM(todo.todoAmount, todo.todoTitle);
+        }
     })
 }
 
@@ -657,6 +663,12 @@ function displayCompletedTodosFromLocalStorage()
     {
         // Adding the text content from each todo in the completedTodosContainer
         addCompletedItemToDOM(completedTodo.todoAmount, completedTodo.todoTitle)
+
+        // Check if the todoTitle and todoAmount are not empty
+        if (completedTodo.todoTitle.trim() !== '' && completedTodo.todoAmount.trim() !== '')
+        {
+            addCompletedItemToDOM(completedTodo.todoAmount, completedTodo.todoTitle);
+        }
     })
 }
 

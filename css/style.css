@@ -202,3 +202,11 @@ button.btn.add-todo-btn
     }
 }
 
+i.fa-brands.fa-github
+{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 25px;
+    color: #fff;
+}
