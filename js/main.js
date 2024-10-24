@@ -701,9 +701,10 @@ function removeFromLocalStorage(todoTitleToRemove)
             If todoTitle is equal to the title of the todo wanted to be deleted,
             then the todo gets removed
         */
-        if (todo.todoTitle === todoTitleToRemove) {
+        if (todo.todoTitle === todoTitleToRemove)
+        {
             // If match is found, remove todo from todoArray and return the todo.
-            const completeTodo = todoArray.splice(index, 1)[0] // Remove from todoArray
+            const completeTodo = todoArray.splice(index, 1)[0]
 
             // Push the completeTodo to the completeTodos array
             completeTodos.push(completeTodo)
